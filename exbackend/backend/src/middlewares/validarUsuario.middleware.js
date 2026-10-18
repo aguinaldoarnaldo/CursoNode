@@ -48,9 +48,9 @@ export function validarUsuario(req, res, next) {
 /*
 | Atalho | Resultado |
 |---|---|
-| `exappm` | Aplicação Express completa |
+| `exappm`   | Aplicação Express completa |
 | `eximport` | Importação de um módulo |
 | `exexport` | Função exportada |
-| `exroute` | Router Express |
-| `exctrl` | Controller |
+| `exroute`  | Router Express |
+| `exctrl`   | Controller |
 */
