@@ -1,0 +1,34 @@
+function somar(a,b) {
+    return a + b;
+}
+
+function subtrair(a,b) {
+    return a - b;
+    
+}
+
+function multiplicacao(a,b) {
+    return a * b;
+}
+
+function divisao(a,b) {
+    return a / b;
+}
+
+function restoDivisao(a,b){
+    return a % b;
+}
+
+function potencia(a,b){
+    return a ** b;
+}
+
+
+export{
+    somar,
+    subtrair,
+    multiplicacao,
+    divisao,
+    restoDivisao,
+    potencia
+};

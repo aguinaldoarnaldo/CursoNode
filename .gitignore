@@ -1,0 +1,17 @@
+# Dependências Node.js
+node_modules/
+
+# Variáveis de ambiente
+.env
+.env.*
+
+# Exceção para modelos de configuração
+!.env.example
+
+# Logs
+*.log
+
+# Ficheiros temporários
+.DS_Store
+Thumbs.db
+

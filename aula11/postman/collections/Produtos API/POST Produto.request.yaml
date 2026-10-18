@@ -1,0 +1,45 @@
+$kind: http-request
+name: POST Produto
+order: 1000
+url: 'http://localhost:3000/produtos'
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+        "nome": "Mouse",
+        "preco": "30000",
+        "categoria": "IT"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response has mensagem field", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("mensagem");
+      });
+
+      pm.test("produto object contains nome", function () {
+          const json = pm.response.json();
+          pm.expect(json.produto).to.have.property("nome");
+          pm.expect(json.produto.nome).to.be.a("string");
+      });
+
+      pm.test("produto object contains preco", function () {
+          const json = pm.response.json();
+          pm.expect(json.produto).to.have.property("preco");
+      });
+
+      pm.test("produto object contains categoria", function () {
+          const json = pm.response.json();
+          pm.expect(json.produto).to.have.property("categoria");
+          pm.expect(json.produto.categoria).to.be.a("string");
+      });
