@@ -1,4 +1,4 @@
-const usuarios = [
+/*const usuarios = [
   {
     id: 1,
     nome: "AGuinaldo Arnaldo Arnaldo",
@@ -29,7 +29,9 @@ const usuarios = [
     idade: 21,
     email: "aldinaarnaldo@gmail.com",
   },
-];
+];*/
+
+import pool from "./config/database.js";
 
 export function buscarUsuarios() {
   return usuarios;
@@ -55,12 +57,39 @@ export function buscarUsuarioPorNome(nome) {
   return usuario;
 }
 
-export function criarUsuario(dadosUsuario) {
-  const novoId = usuarios.length + 1;
+export async function criarUsuario(nome, idade, email) {
+  const resultado = await pool.query(
+    `INSERT INTO usuarios (nome, idade, email) VALUES ($1, $2, $3) RETURNING *`,
 
-  const novoUsuario = {
-    id: novoId,
-    nome: dadosUsuario.nome,
+    [nome, idade, email]
+  );
+
+  return resultado.rows[0];
+}
+
+export async function atualizarUsuario(id, dadosUsuario) {
+  const [result] = await pool.query(
+    "UPDATE usuarios SET nome = ?, idade = ?, email = ? WHERE id = ?",
+    [dadosUsuario.nome, dadosUsuario.idade, dadosUsuario.email, id]
+  );
+
+  if (result.affectedRows === 0) {
+    return null;
+  }
+
+  return { id, ...dadosUsuario };
+}
+
+export async function excluirUsuario(id) {
+  const [result] = await pool.query("DELETE FROM usuarios WHERE id = ?", [id]);
+
+  if (result.affectedRows === 0) {
+    return null;
+  }
+
+  return { id };
+}
+
     idade: dadosUsuario.idade,
     email: dadosUsuario.email,
   };
