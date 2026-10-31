@@ -82,23 +82,20 @@ export function buscarUsuarioNome(req, res) {
   });
 }
 
-
 //Criar Usuario
-export function criarUsuarioController(req, res) {
-  console.log("POST chegou ao Controller!");
+export async function criarUsuarioController(req, res, next) {
+  try {
+    const { nome, idade, email } = req.body;
 
-  const { nome, idade, email } = req.body;
+    const usuario = await criarUsuario(nome, idade, email);
 
-  const usuario = criarUsuario({
-    nome,
-    idade: idadeConvertida,
-    email,
-  });
-
-  res.status(201).json({
-    mensagem: "Usuário criado com sucesso.",
-    usuario,
-  });
+    res.status(201).json({
+      mensagem: "Usuário criado com sucesso.",
+      dados: usuario,
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
 //Atualizar usuario
