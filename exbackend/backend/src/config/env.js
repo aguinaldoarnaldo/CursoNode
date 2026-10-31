@@ -1,4 +1,4 @@
-import  "dotenv/config";
+import dotenv from "dotenv/config";
 
 const PORT = process.env.PORT || 3000;
 if (!Number.isInteger(PORT) || PORT < 1 || PORT > 65535) {

@@ -12,7 +12,7 @@ export function validarUsuario(req, res, next) {
 
   //Verificar se a idade é um número
   if (Number.isNaN(idadeConvertida)) {
-    return res.statusÇ(400).json({
+    return res.status(400).json({
       mensagem: "A idade deve ser um número.",
     });
   }
@@ -33,15 +33,15 @@ export function validarUsuario(req, res, next) {
   }
 
   if (idadeConvertida < 18) {
-  return res.status(400).json({
-    mensagem: "É necessário ter pelo menos 18 anos.",
-  });
-}
+    return res.status(400).json({
+      mensagem: "É necessário ter pelo menos 18 anos.",
+    });
+  }
 
   //Guardar a idade convertida para o controller utilizar.
   req.body.idade = idadeConvertida;
 
-    // Se todas as validações passarem, continua.
+  // Se todas as validações passarem, continua.
   next();
 }
 
